@@ -24,8 +24,8 @@ $borderW: 2px;
   border: none;
   transition: color 0.5s;
   cursor: pointer;
-
   border-radius: 8px;
+
   &:before {
     content: "";
     z-index: 1;

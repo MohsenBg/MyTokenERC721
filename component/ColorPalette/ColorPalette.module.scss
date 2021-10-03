@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap");
+
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10em;
+  .btn {
+    margin-top: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      cursor: pointer;
+      font-family: "Otomanopee One", sans-serif;
+      background-color: rgb(0, 0, 0);
+      padding: 8px 30px;
+      border-radius: 5px;
+      color: rgb(255, 255, 255);
+      &:hover {
+        background-color: rgb(58, 58, 58);
+        color: rgb(255, 255, 255);
+      }
+    }
+  }
+}

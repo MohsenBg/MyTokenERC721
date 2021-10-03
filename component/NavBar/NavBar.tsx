@@ -13,7 +13,7 @@ const NavBar = () => {
     <div className={styles.containerNav}>
       <div className={styles.mainContentNav}>
         <div className={styles.NavBar}>
-          <div className={styles.Title}>Color Pinker</div>
+          <div className={styles.Title}>Color Picker</div>
           {accounts.length >= 1 ? (
             <>
               <div className={styles.Accounts}>

@@ -4,8 +4,13 @@ import { useSelector } from "react-redux";
 import Web3 from "web3";
 import { initialState } from "../../Redux/store";
 import styles from "./PanelAccount.module.scss";
+
 const PanelAccount = () => {
   const [ETHBalance, setETHBalance] = useState("0");
+
+  const currentAccount = useSelector(
+    (state: typeof initialState) => state.AccountData.addressAccounts
+  );
 
   const ETH = useSelector(
     (state: typeof initialState) => state.AccountData.balance

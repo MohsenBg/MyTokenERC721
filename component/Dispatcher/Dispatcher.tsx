@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Web3 from "web3";
 import { ActionTypeAccountInfo } from "../../Redux/AccountInfo/ActionType/ActionType";
-
+import { ABI_COLOR, ADDRESS_COLOR } from "../../config_Contracts";
 import { initialState } from "../../Redux/store";
 import { ActionTypeError } from "../../Redux/Error/ActionType";
 import { ErrorTypes } from "../Error/ErrorType/ErrorType";
 import { useRouter } from "next/router";
+import { ActionTypeColor } from "../../Redux/Color/ActionType";
 const Dispatcher = () => {
   const dispatch = useDispatch();
   const [blockNumber, setBlockNumber] = useState<any>("");
@@ -46,6 +47,10 @@ const Dispatcher = () => {
         ChainId(web3);
         setAccount(accounts);
         CheckChainId(web3);
+        if (statusChainID) {
+          BalanceOfETH(web3, accounts);
+          getColors(web3, accounts);
+        }
       }
     };
     handelWalletIsConnected();
@@ -63,6 +68,7 @@ const Dispatcher = () => {
           setAccount(accounts);
           if (statusChainID) {
             BalanceOfETH(web3, accounts);
+            getColors(web3, accounts);
           }
         });
       }
@@ -82,6 +88,7 @@ const Dispatcher = () => {
           });
           if (statusChainID) {
             BalanceOfETH(web3, accounts);
+            getColors(web3, accounts);
           }
         }
       }
@@ -180,6 +187,29 @@ const Dispatcher = () => {
     }
   };
 
+  let totalSupply: any;
+  const getColors = async (web3: Web3, accounts: any) => {
+    const ColorContract = new web3.eth.Contract(
+      //@ts-ignore
+      ABI_COLOR,
+      ADDRESS_COLOR
+    );
+    const total = await ColorContract.methods.totalSupply().call();
+    if (total !== totalSupply) {
+      let colors = [];
+      for (let i = 0; i < parseInt(total); i++) {
+        const color = await ColorContract.methods.colors(i).call();
+        colors.push({
+          id: i,
+          color: color,
+        });
+      }
+      dispatch({
+        type: ActionTypeColor.COLOR,
+        payload: colors.reverse(),
+      });
+    }
+  };
   return null;
 };
 
