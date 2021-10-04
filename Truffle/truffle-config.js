@@ -21,8 +21,6 @@
 // create a file at the root of your project and name it .env -- there you can set process variables
 // like the mnemomic below. Note: .env is ignored by git in this project to keep your private information safe
 require('dotenv').config();
-const kovanMnemonic = process.env["KOVAN_MNEMONIC"];
-const infuraKey = process.env["INFURA_KEY"];
 
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
@@ -59,19 +57,24 @@ module.exports = {
       port: 8545,            // Standard Ethereum port (default: none)
       network_id: "*",       // Any network (default: none)
     },
-    local_ethereum: {
-      network_id: 31337,
+    //for use with local environment -- use `npm runLocalArbitrum` to start
+    ethereum_local: {
+      network_id: '*',
       host: '127.0.0.1',
-      port: 9545,
+      port: 8545,
       gasPrice: 0
     },
-    kovan: {
-      network_id: 42,
-      chain_id: 42,
-      provider: function() {
-        return new HDWalletProvider(kovanMnemonic, "https://kovan.infura.io/v3/"+ process.env.INFURA_KEY, 0, 1);
-      }
-    }
+    rinkeby:{
+      provider:()=> 
+      new HDWalletProvider(process.env.MNEMONIC,
+       `https://rinkeby.infura.io/v3/${process.env.INFURA_KEY}`),
+       network_id: 4,
+       gas: 4500000,
+       gasPrice: 10000000000,
+       timeoutBlocks:2000,
+       confirmations:2,
+       skipDryRun:true,
+    },
   },
 
   // Set default mocha options here, use special reporters etc.

@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { ErrorTypes } from "./ErrorType/ErrorType";
 import { ActionTypeError } from "../../Redux/Error/ActionType";
 import { useRouter } from "next/dist/client/router";
+import detectEthereumProvider from "@metamask/detect-provider";
+import Web3 from "web3";
 const Error = () => {
   const router = useRouter();
   //-redux
@@ -34,6 +36,8 @@ const Error = () => {
 
   const dispatch = useDispatch();
   const ErrorHandel = async (ErrorType: any, accept: any) => {
+    const provider: any = await detectEthereumProvider();
+    const web3 = new Web3(provider);
     switch (ErrorType) {
       case ErrorTypes.META_MASK_NOT_INSTALL:
         dispatch({
@@ -52,9 +56,16 @@ const Error = () => {
         });
         break;
       case ErrorTypes.WRONG_CHAIN_ID:
-        dispatch({
-          type: ActionTypeError.END_ERROR,
-        });
+        await provider
+          .request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: web3.utils.toHex(421611) }], // chainId must be in hexadecimal numbers
+          })
+          .then(() => {
+            dispatch({
+              type: ActionTypeError.END_ERROR,
+            });
+          });
         break;
       case ErrorTypes.CONNECT_YOUR_ACCOUNT:
         dispatch({

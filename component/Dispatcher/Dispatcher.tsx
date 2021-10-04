@@ -166,15 +166,15 @@ const Dispatcher = () => {
 
   const CheckChainId = async (web3: Web3) => {
     let currentChainId: any = await web3.eth.getChainId();
-    const chain_id: any = process.env.NEXT_PUBLIC_OPTIMISTIC_KOVAN_CHAIN_ID;
+    const chain_id: any = process.env.NEXT_PUBLIC_ARBITRUM_RINKEBY_CHAIN_ID;
     if (currentChainId.toString() !== chain_id.toString()) {
       dispatch({
         type: ActionTypeError.ON_ERROR,
         title: "Chain ID",
-        text: "Please connect to Rinkeby NetWork(ID:4).",
+        text: "switch Arbitrum Testnet NetWork(ID:421611)",
         icon: "error",
-        countBtn: 0,
-        btn1: "",
+        countBtn: 1,
+        btn1: "switch",
         btn2: "",
         hidden: false,
         fontSize: "18px",

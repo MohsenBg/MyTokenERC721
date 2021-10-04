@@ -1,6 +1,5 @@
 import detectEthereumProvider from "@metamask/detect-provider";
-import { useState } from "hoist-non-react-statics/node_modules/@types/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/lib/css/styles.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -87,6 +86,7 @@ const ColorPalette = () => {
           hideRGB
           dark
         />
+        <div className={styles.read} />
         <div className={styles.btn}>
           <span onClick={handelAddColorBtn}>AddColor</span>
         </div>

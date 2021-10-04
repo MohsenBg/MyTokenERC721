@@ -14,7 +14,7 @@
     "compile:evm": "truffle compile",
     "compile:ovm": "truffle compile --config truffle-config.ovm.js",
     "migrate:evm": "truffle migrate",
-    "migrate:ovm": "truffle migrate --skip-dry-run --config truffle-config.ovm.js --network $npm_config_network",
+    "migrate:ovm": "truffle migrate --config truffle-config.ovm.js --network $npm_config_network",
     "test:evm": "truffle test",
     "test:ovm": "truffle test --config truffle-config.ovm.js --network $npm_config_network"
   },
@@ -28,13 +28,15 @@
   },
   "devDependencies": {
     "@types/react": "17.0.19",
+    "arb-ethers-web3-bridge": "^0.7.3",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.0",
     "truffle-assertions": "^0.9.2"
   },
   "dependencies": {
-    "@eth-optimism/core-utils": "^0.5.5",
+    "@eth-optimism/core-utils": "^0.6.0",
     "@eth-optimism/plugins": "^1.0.0-alpha.3",
+    "@eth-optimism/solc": "^0.7.6-alpha.1",
     "@metamask/detect-provider": "^1.2.0",
     "@openzeppelin/contracts": "^4.3.2",
     "@truffle/hdwallet-provider": "^1.5.0",
@@ -51,6 +53,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "sass": "^1.38.0",
+    "solc": "^0.8.9",
     "truffle-flattener": "^1.5.0",
     "typescript": "4.3.5",
     "web3": "^1.5.2"
