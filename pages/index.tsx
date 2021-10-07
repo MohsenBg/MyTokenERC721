@@ -3,8 +3,8 @@ import Head from "next/head";
 import { useSelector } from "react-redux";
 import ColorPalette from "../component/ColorPalette/ColorPalette";
 import Colors from "../component/Colors/Colors";
-import { initialState } from "../Redux/store";
 import styles from "../styles/Home.module.scss";
+import { initialState } from "../Redux/store";
 const Home: NextPage = () => {
   return (
     <>
