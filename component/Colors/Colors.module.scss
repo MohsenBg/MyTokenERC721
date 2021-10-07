@@ -22,4 +22,13 @@
       }
     }
   }
+  .warning {
+    background-color: rgba(255, 0, 0, 0.185);
+    padding: 5px 25px;
+    border-radius: 8px;
+    color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

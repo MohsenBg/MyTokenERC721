@@ -75,6 +75,13 @@ module.exports = {
        confirmations:2,
        skipDryRun:true,
     },
+    bscTestnet:{
+      provider:()=> 
+      new HDWalletProvider(process.env.MNEMONIC,
+       `https://data-seed-prebsc-2-s2.binance.org:8545`),
+       network_id: 97,
+       skipDryRun:true,
+    },
   },
 
   // Set default mocha options here, use special reporters etc.

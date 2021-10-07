@@ -1,7 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useSelector } from "react-redux";
 import ColorPalette from "../component/ColorPalette/ColorPalette";
 import Colors from "../component/Colors/Colors";
+import { initialState } from "../Redux/store";
 import styles from "../styles/Home.module.scss";
 const Home: NextPage = () => {
   return (

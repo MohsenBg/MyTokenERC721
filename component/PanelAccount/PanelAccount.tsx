@@ -37,7 +37,7 @@ const PanelAccount = () => {
       <div className={styles.background}>
         <div className={styles.mainContent}>
           <div className={styles.option}>
-            <span>balance (ETH):</span>
+            <span>balance (BNB):</span>
             <span className={styles.number}>{ETHBalance}</span>
           </div>
         </div>

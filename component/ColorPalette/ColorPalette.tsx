@@ -28,37 +28,24 @@ const ColorPalette = () => {
         ABI_COLOR,
         ADDRESS_COLOR
       );
-      try {
-        let gas: any;
-        await ColorContract.methods
-          .mint(color.hex)
-          .estimateGas({ from: currentAccount[0] })
-          .then(function (gasAmount: any) {
-            gas = gasAmount;
-          });
-        await ColorContract.methods
-          .mint(color.hex)
-          .send({ from: currentAccount[0], gas: gas });
-      } catch (error: any) {
-        if (error.code === 4001) {
-          dispatch({
-            type: ActionTypeError.ON_ERROR,
-            title: "Meta Mask",
-            text: "Denied transaction signature",
-            icon: "error",
-            countBtn: 1,
-            btn1: "ok",
-            btn2: "",
-            hidden: false,
-            fontSize: "18px",
-            zIndex: 10,
-            ErrorType: ErrorTypes.META_MASK_USER_DENIED_TRANSACTION,
-          });
-          if (error.code === -32002) {
+      if (currentAccount.length > 0) {
+        try {
+          let gas: any;
+          await ColorContract.methods
+            .mint(color.hex)
+            .estimateGas({ from: currentAccount[0] })
+            .then(function (gasAmount: any) {
+              gas = gasAmount;
+            });
+          await ColorContract.methods
+            .mint(color.hex)
+            .send({ from: currentAccount[0], gas: gas });
+        } catch (error: any) {
+          if (error.code === 4001) {
             dispatch({
               type: ActionTypeError.ON_ERROR,
               title: "Meta Mask",
-              text: "request already sent to you ",
+              text: "Denied transaction signature",
               icon: "error",
               countBtn: 1,
               btn1: "ok",
@@ -66,10 +53,39 @@ const ColorPalette = () => {
               hidden: false,
               fontSize: "18px",
               zIndex: 10,
-              ErrorType: ErrorTypes.META_MASK_CONNECTION_REJECTED,
+              ErrorType: ErrorTypes.META_MASK_USER_DENIED_TRANSACTION,
             });
+            if (error.code === -32002) {
+              dispatch({
+                type: ActionTypeError.ON_ERROR,
+                title: "Meta Mask",
+                text: "request already sent to you ",
+                icon: "error",
+                countBtn: 1,
+                btn1: "ok",
+                btn2: "",
+                hidden: false,
+                fontSize: "18px",
+                zIndex: 10,
+                ErrorType: ErrorTypes.META_MASK_CONNECTION_REJECTED,
+              });
+            }
           }
         }
+      } else {
+        dispatch({
+          type: ActionTypeError.ON_ERROR,
+          title: "Meta Mask",
+          text: "connect to your Account",
+          icon: "error",
+          countBtn: 1,
+          btn1: "ok",
+          btn2: "",
+          hidden: false,
+          fontSize: "18px",
+          zIndex: 10,
+          ErrorType: ErrorTypes.CONNECT_YOUR_ACCOUNT,
+        });
       }
     }
   };

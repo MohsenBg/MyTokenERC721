@@ -129,7 +129,6 @@ const Dispatcher = () => {
         payload: accounts,
       });
     } else {
-      router.push("/", undefined, { shallow: false });
       dispatch({
         type: ActionTypeAccountInfo.ACCOUNT_ADDRESS,
         payload: accounts,
@@ -166,12 +165,12 @@ const Dispatcher = () => {
 
   const CheckChainId = async (web3: Web3) => {
     let currentChainId: any = await web3.eth.getChainId();
-    const chain_id: any = process.env.NEXT_PUBLIC_ARBITRUM_RINKEBY_CHAIN_ID;
+    const chain_id: any = process.env.NEXT_PUBLIC_BSC_TESTNET_CHAIN_ID;
     if (currentChainId.toString() !== chain_id.toString()) {
       dispatch({
         type: ActionTypeError.ON_ERROR,
         title: "Chain ID",
-        text: "switch Arbitrum Testnet NetWork(ID:421611)",
+        text: "switch BSC NetWork(ID:56)",
         icon: "error",
         countBtn: 1,
         btn1: "switch",

@@ -58,8 +58,28 @@ const Error = () => {
       case ErrorTypes.WRONG_CHAIN_ID:
         await provider
           .request({
-            method: "wallet_switchEthereumChain",
-            params: [{ chainId: web3.utils.toHex(421611) }], // chainId must be in hexadecimal numbers
+            method: "wallet_addEthereumChain",
+            params: [
+              {
+                chainId: "0x61",
+                // web3.utils.toHex(97),
+                chainName: "Binance Smart Chain Testnet",
+                nativeCurrency: {
+                  name: "BNB",
+                  symbol: "BNB",
+                  decimals: 18,
+                },
+                rpcUrls: [
+                  "https://data-seed-prebsc-1-s1.binance.org:8545/",
+                  "https://data-seed-prebsc-2-s1.binance.org:8545/",
+                  "https://data-seed-prebsc-1-s2.binance.org:8545/",
+                  "https://data-seed-prebsc-2-s2.binance.org:8545/",
+                  "https://data-seed-prebsc-1-s3.binance.org:8545/",
+                  "https://data-seed-prebsc-2-s3.binance.org:8545/",
+                ],
+                blockExplorerUrls: ["https://testnet.bscscan.com"],
+              },
+            ], // chainId must be in hexadecimal numbers
           })
           .then(() => {
             dispatch({
@@ -92,7 +112,14 @@ const Error = () => {
   return (
     <>
       {hidden ? null : (
-        <div className={styles.container} style={{ zIndex: _zIndex }}>
+        <div
+          className={styles.container}
+          style={
+            ErrorTypes.WRONG_CHAIN_ID === ErrorType
+              ? { zIndex: _zIndex, backgroundColor: "black" }
+              : { zIndex: _zIndex }
+          }
+        >
           <div className={styles.box}>
             {icon === "error" ? (
               <div>
