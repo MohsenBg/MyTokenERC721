@@ -23,6 +23,7 @@ const Dispatcher = () => {
   useEffect(() => {
     const OnChangeChainId = async () => {
       const providerMetaMask: any = await detectEthereumProvider();
+      const web3 = new Web3(providerMetaMask);
       if (providerMetaMask) {
         //@ts-ignore
         providerMetaMask.on("chainChanged", async (chainId: string) => {
@@ -170,10 +171,10 @@ const Dispatcher = () => {
       dispatch({
         type: ActionTypeError.ON_ERROR,
         title: "Chain ID",
-        text: "switch BSC NetWork(ID:56)",
+        text: "Switch BSC NetWork(ID:97)",
         icon: "error",
         countBtn: 1,
-        btn1: "switch",
+        btn1: "Switch",
         btn2: "",
         hidden: false,
         fontSize: "18px",
